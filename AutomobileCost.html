@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Automobile Cost</title>
+    <link rel="stylesheet" href="css/TableDesign.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+
+    <div class="card-header bg-transparent border-success"></div>
+    <div class="card-header border-success" align="center">
+        <h3>Calculate Automobile Cost</h3>
+    </div>
+    <div class="navbar navbar-expand-lg"></div>
+</head>
+
+<body style="background-color:white;">
+
+    <table align="center">
+        <tr>
+            <th id="tableheadingstyle">Loan Payment: </th>
+            <td>
+                <input id="LoanAmount" type="number" class="form-control mb-2 text-info" placeholder="0.00">
+            </td>
+        </tr>
+
+        <tr>
+            <th id="tableheadingstyle">Insurance: </th>
+            <td>
+                <input id="InsuranceAmount" type="number" class="form-control mb-2 text-info" placeholder="0.00">
+            </td>
+        </tr>
+
+        <tr>
+            <th id="tableheadingstyle">Gas: </th>
+            <td>
+                <input id="GasAmount" type="number" class="form-control mb-2 text-info" placeholder="0.00">
+            </td>
+        </tr>
+
+        <tr>
+            <th id="tableheadingstyle">Oil: </th>
+            <td>
+                <input id="OilAmount" type="number" class="form-control mb-2 text-info" placeholder="0.00">
+            </td>
+        </tr>
+
+        <tr>
+            <th id="tableheadingstyle">Tires: </th>
+            <td>
+                <input id="TiresAmount" type="number" class="form-control mb-2 text-info" placeholder="0.00">
+            </td>
+        </tr>
+
+        <tr>
+            <th id="tableheadingstyle">Maintenance: </th>
+            <td>
+                <input id="MaintenanceAmount" type="number" class="form-control mb-2 text-info" placeholder="0.00">
+            </td>
+        </tr>
+
+        <tr>
+            <th id="tableheadingstyle" colspan="2">
+                <button type="button" class="btn btn-primary" style="padding-left: 70px; padding-right: 70px" onclick="calculateExpense();">Calculate</button>
+                <button type="button" class="btn btn-outline-primary" style="padding-left: 70px; padding-right: 70px" onclick="reset();">Reset</button>
+            </th>
+        </tr>
+
+        <tr style="background-color: honeydew; visibility: hidden;" id="ShowMonthlyAmount">
+            <th style="-webkit-text-fill-color: brown">
+                <b>
+                    <h4>The montly cost: </h4>
+                </b>
+            </th>
+            <td>
+                <label id="MonthlyPrice" class="text-success" style="font-size: 20px "></label>
+            </td>
+        </tr>
+
+        <tr style="background-color: lightcyan; visibility: hidden;" id="ShowAnualAmount">
+            <th style="-webkit-text-fill-color: brown">
+                <b>
+                    <h4>The annual cost: </h4>
+                </b>
+            </th>
+            <td>
+                <label id="AnnualPrice" class="text-info" style="font-size: 20px;"></label>
+            </td>
+        </tr>
+    </table>
+</body>
+
+</html>
+<script language="JavaScript">
+
+
+    function calculateExpense() {
+        console.log('Calculate Expense');
+        let loan = 0.00;
+        let insurace = 0.00;
+        let gas = 0.00;
+        let oil = 0.00;
+        let tires = 0.00;
+        let maintenance = 0.00;
+
+        if (document.getElementById('LoanAmount').value) {
+            loan = parseFloat(document.getElementById('LoanAmount').value);
+        }
+
+        if (document.getElementById('InsuranceAmount').value) {
+            insurace = parseFloat(document.getElementById('InsuranceAmount').value);
+        }
+
+        if (document.getElementById('GasAmount').value) {
+            gas = parseFloat(document.getElementById('GasAmount').value);
+        }
+
+        if (document.getElementById('OilAmount').value) {
+            oil = parseFloat(document.getElementById('OilAmount').value);
+        }
+
+        if (document.getElementById('TiresAmount').value) {
+            tires = parseFloat(document.getElementById('TiresAmount').value);
+        }
+
+        if (document.getElementById('MaintenanceAmount').value) {
+            maintenance = parseFloat(document.getElementById('MaintenanceAmount').value);
+        }
+
+        var MonthlyCost = (loan + insurace + gas + oil + tires + maintenance) * 4;
+        var AnnualCost = (loan + insurace + gas + oil + tires + maintenance) * 12;
+
+        if (isNaN(MonthlyCost) || MonthlyCost == 0) {
+            MonthlyCost = "0.00";
+        }
+        if (isNaN(AnnualCost) || AnnualCost == 0) {
+            AnnualCost = "0.00";
+        }
+
+        console.log('LoanAmount: ' + loan + ' InsuranceAmount: ' + insurace + ' GasAmount: ' + gas + ' OilAmount: ' + oil + ' TiresAmount: ' + tires + ' MaintenanceAmount: ' + maintenance);
+        console.log('MonthlyPrice: ' + MonthlyCost + ' AnnualPrice: ' + AnnualCost);
+
+        //document.getElementById('ShowMonthlyAmount').style.visibility = 'visible';
+        //document.getElementById('ShowAnualAmount').style.visibility = 'visible';
+        document.getElementById('MonthlyPrice').innerHTML = MonthlyCost;
+        document.getElementById('AnnualPrice').innerHTML = AnnualCost;
+
+        if ((isNaN(MonthlyCost) || MonthlyCost == 0) && (isNaN(AnnualCost) || AnnualCost == 0)) {
+            alert("Please enter the ammount.");
+        }
+        else {
+            document.getElementById('ShowMonthlyAmount').style.visibility = 'visible';
+            document.getElementById('ShowAnualAmount').style.visibility = 'visible';
+        }
+    }
+
+    function reset() {
+        console.log('Reset All');
+        document.getElementById('LoanAmount').value = "";
+        document.getElementById('InsuranceAmount').value = "";
+        document.getElementById('GasAmount').value = "";
+        document.getElementById('OilAmount').value = "";
+        document.getElementById('TiresAmount').value = "";
+        document.getElementById('MaintenanceAmount').value = "";
+        document.getElementById('ShowMonthlyAmount').style.visibility = 'hidden';
+        document.getElementById('ShowAnualAmount').style.visibility = 'hidden';
+    }
+</script>
